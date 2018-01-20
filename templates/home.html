@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>MySQL监控平台</title>
+		<script src={{ url_for("static", filename="jquery/jquery.min.js" ) }} type="text/javascript"></script>
+		<link href={{ url_for('static', filename='css/bootstrap.css' ) }} rel="stylesheet" type="text/css">
+		<script src={{ url_for("static", filename="js/bootstrap.min.js" ) }} type="text/javascript"></script>
+		<script src={{ url_for("static", filename="jquery/jquery-form.js" ) }} type="text/javascript"></script>
+
+		<script src={{ url_for("static", filename="js/bootstrap-select.js" ) }} type="text/javascript"></script>
+		<link href={{ url_for("static", filename='css/bootstrap-select.css' ) }} rel="stylesheet" type="text/css">
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<br>			
+			<div class="row">
+				<div class="col-md-2">
+					<div id="myTab" class="list-group">
+						<a href="javascript:void(0)" id="status" class="active list-group-item" onclick=start_timer("/data/common","status")><span class="glyphicon glyphicon-stats"> Status</span></a>
+						<a href="javascript:void(0)" id="innodb" class="list-group-item" onclick=start_timer("/data/innodb","innodb")><span class="glyphicon glyphicon-file"> INNODB</span></a>
+						<a href="javascript:void(0)" id="repl" class="list-group-item" onclick=start_timer("/data/replication","repl")><span class="glyphicon glyphicon-filter"> Replication</span></a>
+					</div>
+				</div>
+				<div class="col-md-10" id="data">
+				</div>
+				<iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
+			</div>
+		</div>
+	</body>
+</html>
+
+<script src={{ url_for("static", filename="js/common.js" ) }} type="text/javascript"></script>
+
+<script type="text/javascript">
+	start_timer("/data/common","status");
+</script>

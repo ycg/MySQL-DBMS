@@ -1,0 +1,700 @@
+{% if(mysql_datas != None) %}
+<div class="row">
+    <!--QPS TPS-->
+    <div class="col-md-12">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>
+
+                    </th>
+                    <th></th>
+                    <th colspan="4" class="text-center">
+                        DML
+                    </th>
+                    <th colspan="5" class="text-center">
+                        QPS TPS
+                    </th>
+                    <th colspan="2" class="text-center">
+                        Net
+                    </th>
+                    <th colspan="5" class="text-center">
+                        Thread
+                    </th>
+                    <th colspan="4" class="text-center">
+                        Connection
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        Host
+                    </th>
+                    <th>
+                        Select
+                    </th>
+                    <th>
+                        Insert
+                    </th>
+                    <th>
+                        Update
+                    </th>
+                    <th>
+                        Delete
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                    <th>
+                        Comm
+                    </th>
+                    <th>
+                        Roll
+                    </th>
+                    <th>
+                        QPS
+                    </th>
+                    <th>
+                        TPS
+                    </th>
+                    <th>
+                        Trxs
+                    </th>
+                    <th>
+                        Rece
+                    </th>
+                    <th>
+                        Send
+                    </th>
+                    <th title="thread cache">
+                        Cache
+                    </th>
+                    <th title="thread count">
+                        Count
+                    </th>
+                    <th title="current running threads">
+                        Run
+                    </th>
+                    <th title="thread wait count for time > 1">
+                        Waits
+                    </th>
+                    <th title="thread cache hit">
+                        Hit
+                    </th>
+                    <th title="connection for per second">
+                        Per
+                    </th>
+                    <th title="connection usage">
+                        Usage
+                    </th>
+                    <th title="aborted clients">
+                        A_Cli
+                    </th>
+                    <th title="aborted connections">
+                        A_Conn
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for status in mysql_datas %}
+                <tr>
+                    <td>
+                        {{ status.host_info.remark }}
+                    </td>
+                    <td>
+                        {{ status.com_select }}
+                    </td>
+                    <td>
+                        {{ status.com_insert }}
+                    </td>
+                    <td>
+                        {{ status.com_update }}
+                    </td>
+                    <td>
+                        {{ status.com_delete }}
+                    </td>
+                    <td>
+                        {{ status.dml }}
+                    </td>
+                    <td>
+                        {{ status.com_commit }}
+                    </td>
+                    <td>
+                        {{ status.com_rollback }}
+                    </td>
+                    <td>
+                        {{ status.questions }}
+                    </td>
+                    <td>
+                        {{ status.tps }}
+                    </td>
+                    <td>
+                        {{ status.trx_count }}
+                    </td>
+                    <td>
+                        {{ status.bytes_sent }}
+                    </td>
+                    <td>
+                        {{ status.bytes_received }}
+                    </td>
+                    <td>
+                        {{ status.mysql_variables.thread_cache_size }}
+                    </td>
+                    <td>
+                        {{ status.threads_connected }}
+                    </td>
+                    <td {% if(status.threads_running > 5) %} class="text-danger" {% endif %}>
+                        {{ status.threads_running }}
+                    </td>
+                    <td>
+                        0
+                    </td>
+                    <td>
+                    	0
+                    </td>
+                    <td>
+                    	0
+                    </td>
+                    <td>
+                    	0
+                    </td>
+                    <td>
+                        {{ status.aborted_clients }}
+                    </td>
+                    <td>
+                        {{ status.aborted_connects }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!--Thread-->
+    <!--<div class="col-md-5">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>
+
+                    </th>
+                    <th colspan="4" class="text-center">
+                        Thread Cache
+                    </th>
+                    <th colspan="4" class="text-center">
+                        Connection
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        Host
+                    </th>
+                    <th title="thread count">
+                        Count
+                    </th>
+                    <th title="current running threads">
+                        Run
+                    </th>
+                    <th title="thread wait count for time > 1">
+                        Waits
+                    </th>
+                    <th title="thread cache hit">
+                        Hit
+                    </th>
+                    <th title="connection for per second">
+                        Per
+                    </th>
+                    <th title="connection usage">
+                        Usage
+                    </th>
+                    <th title="aborted clients">
+                        A_Cli
+                    </th>
+                    <th title="aborted connections">
+                        A_Conn
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for status in mysql_datas %}
+                <tr>
+                    <td>
+                        {{ status.host_info.remark }}
+                    </td>
+                    <td>
+                        {{ status.threads_connected }}
+                    </td>
+                    <td {% if(status.threads_running > 5) %} class="text-danger" {% endif %}>
+                        {{ status.threads_running }}
+                    </td>
+                    <td>
+                        0
+                    </td>
+                    <td>
+                    	0
+                    </td>
+                    <td>
+                    	0
+                    </td>
+                    <td>
+                    	0
+                    </td>
+                    <td>
+                        {{ status.aborted_clients }}
+                    </td>
+                    <td>
+                        {{ status.aborted_connects }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>-->
+</div>
+<div class="row">
+    <!--Handler-->
+    <div class="col-md-12">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th colspan="2">
+
+                    </th>
+                    <th colspan="6" class="text-center">
+                        Read Handler
+                    </th>
+                    <th colspan="7" class="text-center">
+                        Table Open Cache
+                    </th>
+                    <th colspan="2" class="text-center">
+                        File Open
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        Host
+                    </th>
+                    <th>
+                        Commit
+                    </th>
+                    <th title="rollback">
+                        Roll
+                    </th>
+                    <th>
+                        R_Key
+                    </th>
+                    <th>
+                        R_Next
+                    </th>
+                    <th>
+                        R_First
+                    </th>
+                    <th>
+                        R_Last
+                    </th>
+                    <th>
+                        R_Rnd
+                    </th>
+                    <th>
+                        R_Rnd_Next
+                    </th>
+                    <th title="table_open_cache">
+                        Cache
+                    </th>
+                    <th title="table_open_cache_instances">
+                        Ins
+                    </th>
+                    <th>
+                        Open
+                    </th>
+                    <th>
+                        Opened
+                    </th>
+                    <th>
+                        Hits
+                    </th>
+                    <th>
+                        Misses
+                    </th>
+                    <th>
+                        Overflows
+                    </th>
+                    <th>
+                        Open
+                    </th>
+                    <th>
+                        Opened
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for status in mysql_datas %}
+                <tr>
+                    <td>
+                        {{ status.host_info.remark }}
+                    </td>
+                    <td>
+                        {{ status.handler_commit }}
+                    </td>
+                    <td {% if(status.handler_rollback > 0) %} class="text-danger" {% endif %}>
+                        {{ status.handler_rollback }}
+                    </td>
+                    <td>
+                        {{ status.handler_read_key }}
+                    </td>
+                    <td>
+                        {{ status.handler_read_next }}
+                    </td>
+                    <td>
+                        {{ status.handler_read_first }}
+                    </td>
+                    <td>
+                        {{ status.handler_read_last }}
+                    </td>
+                    <td>
+                        {{ status.handler_read_rnd }}
+                    </td>
+                    <td>
+                        {{ status.handler_read_rnd_next }}
+                    </td>
+                    <td>
+                        {{ status.mysql_variables.table_open_cache }}
+                    </td>
+                    <td {% if(status.mysql_variables.table_open_cache_instances >= 1 and status.mysql_variables.table_open_cache <= 1000) %} class="text-danger" {% endif %}>
+                        {{ status.mysql_variables.table_open_cache_instances }}
+                    </td>
+                    <td {% if(status.open_tables >= status.mysql_variables.table_open_cache) %} class="text-danger" {% endif %}>
+                        {{ status.open_tables }}
+                    </td>
+                    <td {% if(status.opened_tables > 0) %} class="text-danger" {% endif %}>
+                        {{ status.opened_tables }}
+                    </td>
+                    <td>
+                        {{ status.table_open_cache_hits }}
+                    </td>
+                    <td {% if(status.table_open_cache_misses > 0) %} class="text-danger" {% endif %}>
+                        {{ status.table_open_cache_misses }}
+                    </td>
+                    <td {% if(status.table_open_cache_overflows > 0) %} class="text-danger" {% endif %}>
+                        {{ status.table_open_cache_overflows }}
+                    </td>
+                    <td>
+                        {{ status.open_files }}
+                    </td>
+                    <td>
+                        {{ status.opened_files }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!--Table Open Cache-->
+    <!--<div class="col-md-6">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>
+
+                    </th>
+                    <th colspan="7" class="text-center">
+                        Table Open Cache
+                    </th>
+                    <th colspan="2" class="text-center">
+                        File Open
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        Host
+                    </th>
+                    <th title="table_open_cache">
+                        Cache
+                    </th>
+                    <th title="table_open_cache_instances">
+                        Ins
+                    </th>
+                    <th>
+                        Open
+                    </th>
+                    <th>
+                        Opened
+                    </th>
+                    <th>
+                        Hits
+                    </th>
+                    <th>
+                        Misses
+                    </th>
+                    <th>
+                        Overflows
+                    </th>
+                    <th>
+                        Open
+                    </th>
+                    <th>
+                        Opened
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for status in mysql_datas %}
+                <tr>
+                    <td>
+                        {{ status.host_info.remark }}
+                    </td>
+                    <td>
+                        {{ status.mysql_variables.table_open_cache }}
+                    </td>
+                    <td {% if(status.mysql_variables.table_open_cache_instances >= 1 and status.mysql_variables.table_open_cache <= 1000) %} class="text-danger" {% endif %}>
+                        {{ status.mysql_variables.table_open_cache_instances }}
+                    </td>
+                    <td {% if(status.open_tables >= status.mysql_variables.table_open_cache) %} class="text-danger" {% endif %}>
+                        {{ status.open_tables }}
+                    </td>
+                    <td {% if(status.opened_tables > 0) %} class="text-danger" {% endif %}>
+                        {{ status.opened_tables }}
+                    </td>
+                    <td>
+                        {{ status.table_open_cache_hits }}
+                    </td>
+                    <td {% if(status.table_open_cache_misses > 0) %} class="text-danger" {% endif %}>
+                        {{ status.table_open_cache_misses }}
+                    </td>
+                    <td {% if(status.table_open_cache_overflows > 0) %} class="text-danger" {% endif %}>
+                        {{ status.table_open_cache_overflows }}
+                    </td>
+                    <td>
+                        {{ status.open_files }}
+                    </td>
+                    <td>
+                        {{ status.opened_files }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>-->
+</div>
+<div class="row">
+    <!--Tmp Table Binlog Table Lock-->
+    <div class="col-md-12">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>
+
+                    </th>
+                    <th colspan="3" class="text-center">
+                        Tmp Table
+                    </th>
+                    <th colspan="2" class="text-center">
+                        Binlog
+                    </th>
+                    <th colspan="2" class="text-center">
+                        Table Lock
+                    </th>
+                    <th colspan="2" class="text-center">
+                        Query Cache
+                    </th>
+                    <th colspan="5" class="text-center">
+                        Select
+                    </th>
+                    <th colspan="3" class="text-center">
+                        Sort
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        Host
+                    </th>
+                    <th title="create tmp files">
+                        Tmp_F
+                    </th>
+                    <th title="create tmp tables">
+                        Tmp_T
+                    </th>
+                    <th title="create disk tmp tables">
+                        Tmp_D_T
+                    </th>
+                    <th title="binlog cache hit">
+                        Cache_Hit
+                    </th>
+                    <th title="binlog size total">
+                        Size_T
+                    </th>
+                    <th title="table locks immediate">
+                        T_L_I
+                    </th>
+                    <th title="table locks waited">
+                        T_L_W
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Size
+                    </th>
+                    <th title="select full join">
+                        Sel_F_J
+                    </th>
+                    <th title="select scan table">
+                        Sel_S
+                    </th>
+                    <th title="select full range join">
+                        Sel_F_R_J
+                    </th>
+                    <th title="select range check">
+                        Sel_R_C
+                    </th>
+                    <th title="select range">
+                        Sel_R
+                    </th>
+                    <th title="sort merge passes">
+                        Sort_M_P
+                    </th>
+                    <th title="sort range">
+                        Sort_R
+                    </th>
+                    <th title="sort scan">
+                        Sort_S
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for status in mysql_datas %}
+                <tr>
+                    <td>
+                        {{ status.host_info.remark }}
+                    </td>
+                    <td {% if(status.created_tmp_files > 0) %} class="text-danger" {% endif %}>
+                        {{ status.created_tmp_files }}
+                    </td>
+                    <td {% if(status.created_tmp_tables > 500) %} class="text-danger" {% endif %}>
+                        {{ status.created_tmp_tables }}
+                    </td>
+                    <td {% if(status.created_tmp_disk_tables > 0) %} class="text-danger" {% endif %}>
+                        {{ status.created_tmp_disk_tables }}
+                    </td>
+                    <td>
+                    	{{ status.binlog_cache_hit }}
+                    </td>
+                    <td>
+                        {{ status.binlog_size_total }}
+                    </td>
+                    <td>
+                        {{ status.table_locks_immediate }}
+                    </td>
+                    <td {% if(status.table_locks_waited > 0) %} class="text-danger" {% endif %}>
+                        {{ status.table_locks_waited }}
+                    </td>
+                    <td {% if(status.mysql_variables.query_cache_type == 'ON') %} class="text-danger" {% endif %}>
+                        {{ status.mysql_variables.query_cache_type }}
+                    </td>
+                    <td {% if(status.mysql_variables.query_cache_size > 0) %} class="text-danger" {% endif %}>
+                        {{ status.mysql_variables.query_cache_size }}
+                    </td>
+                    <td {% if(status.select_full_join > 0) %} class="text-danger" {% endif %}>
+                        {{ status.select_full_join }}
+                    </td>
+                    <td>
+                        {{ status.select_scan }}
+                    </td>
+                    <td>
+                        {{ status.select_full_range_join }}
+                    </td>
+                    <td>
+                        {{ status.select_range_check }}
+                    </td>
+                    <td>
+                        {{ status.select_range }}
+                    </td>
+                    <td {% if(status.sort_merge_passes > 0) %} class="text-danger" {% endif %}>
+                        {{ status.sort_merge_passes }}
+                    </td>
+                    <td>
+                        {{ status.sort_range }}
+                    </td>
+                    <td>
+                        {{ status.sort_scan }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!--Select Sort-->
+    <!--<div class="col-md-6">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th colspan="9" class="text-center">
+                        Select Sort
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        Host
+                    </th>
+                    <th title="select full join">
+                        Sel_F_J
+                    </th>
+                    <th title="select scan table">
+                        Sel_S
+                    </th>
+                    <th title="select full range join">
+                        Sel_F_R_J
+                    </th>
+                    <th title="select range check">
+                        Sel_R_C
+                    </th>
+                    <th title="select range">
+                        Sel_R
+                    </th>
+                    <th title="sort merge passes">
+                        Sort_M_P
+                    </th>
+                    <th title="sort range">
+                        Sort_R
+                    </th>
+                    <th title="sort scan">
+                        Sort_S
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for status in mysql_datas %}
+                <tr>
+                    <td>
+                        {{ status.host_info.remark }}
+                    </td>
+                    <td {% if(status.select_full_join > 0) %} class="text-danger" {% endif %}>
+                        {{ status.select_full_join }}
+                    </td>
+                    <td>
+                        {{ status.select_scan }}
+                    </td>
+                    <td>
+                        {{ status.select_full_range_join }}
+                    </td>
+                    <td>
+                        {{ status.select_range_check }}
+                    </td>
+                    <td>
+                        {{ status.select_range }}
+                    </td>
+                    <td {% if(status.sort_merge_passes > 0) %} class="text-danger" {% endif %}>
+                        {{ status.sort_merge_passes }}
+                    </td>
+                    <td>
+                        {{ status.sort_range }}
+                    </td>
+                    <td>
+                        {{ status.sort_scan }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>-->
+</div>
+{% endif %}
